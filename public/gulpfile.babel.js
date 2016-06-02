@@ -4,7 +4,7 @@ import gulp from 'gulp';
 import browserify from 'browserify';
 import source from 'vinyl-source-stream';
 
-gulp.task('default', ['transpile']);
+gulp.task('default', ['watch']);
 
 gulp.task('transpile', () => {
   let files = ['src/app.js']

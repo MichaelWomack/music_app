@@ -1,7 +1,3 @@
-'use strict';
-
-import angular from 'angular';
-import 'angular-ui-router';
 
 angular.module('MusicApp', ['ui.router'])
     .config(($stateProvider, $urlRouterProvider) => {
@@ -14,10 +10,11 @@ angular.module('MusicApp', ['ui.router'])
                 templateUrl: 'src/templates/artist.html',
                 controller: 'ArtistController',
                 controllerAs: 'ArtistCtrl'
-
+            })
+            .state('login', {
+              url: '/login',
+              templateUrl: 'src/templates/login.html',
+              controller: 'LoginController',
+              controllerAs: 'LoginCtrl'
             });
     });
-
-angular.module('MusicApp').controller('ArtistController', function() {
-  this.name = "Michael";
-});
