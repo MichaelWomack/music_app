@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html ng-app='MusicApp'>
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Music App</title>
-  </head>
-  <body>
-    <h3>Music App</h3>
+    <link rel="stylesheet" href="vendors/bootstrap.css">
+</head>
+
+<body>
+    <!-- <nav class='navbar navbar-inverse navbar-static-top' role='navigation'>
+        <div class='container'>
+            <div class='navbar-header'>
+                <a class='navbar-brand' ui-sref='artists'>Home</a>
+            </div>
+            <ul class='nav navbar-nav'>
+                <li><a ui-sref='artists'>Artist</a></li>
+                <li><a ui-sref='login'>Feed</a></li>
+                <li><a ui-sref=''>Link 2</a></li>
+            </ul>
+            <div class='navbar-text navbar-right'><a ui-sref=''>Logout</a></div>
+        </div>
+    </nav> -->
+
+
     <div ui-view></div>
+
+
+
 
     <!-- vendors -->
     <script src='vendors/angular.min.js'></script>
     <script src='vendors/angular-ui-router.min.js'></script>
 
+    <!-- app -->
     <script src='src/app.js'></script>
 
-    <!-- scripts -->
-    <script src='src/controllers/artist-controller.js'></script>
+    <!-- controllers -->
+    <script src='src/controllers/artists-controller.js'></script>
     <script src='src/controllers/login-controller.js'></script>
 
+    <!-- directives -->
+    <script src='src/directives/navbar.js'>
 
+    </script>
 
-  </body>
+</body>
+
 </html>

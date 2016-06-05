@@ -1,5 +1,5 @@
 angular.module('MusicApp')
-    .controller('ArtistController', function() {
+    .controller('ArtistsController', function() {
         this.artists = [{
             name: 'Tool',
             album: 'Lateralus'

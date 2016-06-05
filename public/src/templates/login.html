@@ -1,14 +1,25 @@
-<div class='form-group'>
-    <div class='form-control'>
-        <label for="username">Username</label>
-        <input type="text" id='username' ng-model='LoginCtrl.name'>
+<div class='container'>
+    <div class='page-header'>
+        <h1>Audio Bucket</h1>
     </div>
+    <form class='col-sm-6 col-sm-offset-3' ng-submit='LoginCtrl.signIn()'>
+        <div class='form-group'>
+            <label for='email'>Email</label>
+            <input class='form-control input-sm' type="text" id='email' ng-model='LoginCtrl.email'>
+        </div>
 
-    <div class='form-control'>
-      <label for="password">Password</label>
-      <input type="text" id='password' ng-model='LoginCtrl.password'>
-    </div>
+        <div class='form-group'>
+            <label for='password'>Password</label>
+            <input class='form-control input-sm' type="text" id='password' ng-model='LoginCtrl.password'>
+        </div>
 
-    {{LoginCtrl.name}}
-    {{LoginCtrl.password}}
+        <div class='form-group'>
+            <button class='btn btn-primary btn-block'>Sign In</button>
+        </div>
+
+        <div class='form-group'>
+          <a ui-sref='login. register'>Not Registered?</a>
+        </div>
+        {{LoginCtrl.email}} {{LoginCtrl.password}}
+    </form>
 </div>
