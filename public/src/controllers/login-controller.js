@@ -1,7 +1,10 @@
 angular.module('MusicApp')
   .controller('LoginController', function() {
-    this.email = '';
-    this.password = '';
+
+    this.user = {
+      email: '',
+      password: ''
+    };
 
     this.signIn = () => {
       alert('Successfully Signed In!');

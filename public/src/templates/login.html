@@ -2,24 +2,26 @@
     <div class='page-header'>
         <h1>Audio Bucket</h1>
     </div>
-    <form class='col-sm-6 col-sm-offset-3' ng-submit='LoginCtrl.signIn()'>
+    <form class='col-sm-6 col-sm-offset-3'
+          ng-submit='LoginCtrl.signIn()'>
+
         <div class='form-group'>
             <label for='email'>Email</label>
-            <input class='form-control input-sm' type="text" id='email' ng-model='LoginCtrl.email'>
+            <input class='form-control input-sm' type="text" id='email' ng-model='LoginCtrl.user.email'>
         </div>
 
         <div class='form-group'>
             <label for='password'>Password</label>
-            <input class='form-control input-sm' type="text" id='password' ng-model='LoginCtrl.password'>
+            <input class='form-control input-sm' type="text" id='password' ng-model='LoginCtrl.user.password'>
         </div>
 
         <div class='form-group'>
-            <button class='btn btn-primary btn-block'>Sign In</button>
+            <button class='btn btn-primary btn-block' type='submit'>Sign In</button>
+            <button class='btn btn-info btn-block' data-toggle='modal'
+            data-target='#registerModal' type='button'>Not Registered?</button>
         </div>
-
-        <div class='form-group'>
-          <a ui-sref='login. register'>Not Registered?</a>
-        </div>
-        {{LoginCtrl.email}} {{LoginCtrl.password}}
+        {{LoginCtrl.user.email}} {{LoginCtrl.user.password}}
     </form>
+
+    <div ui-view='register'></div>
 </div>
