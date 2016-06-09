@@ -10,7 +10,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 
-app.get('/artist', (req, res) => {
+app.get('/artists', (req, res) => {
   res.send('Artists!');
 });
 
