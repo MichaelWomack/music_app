@@ -1,15 +1,10 @@
 angular.module('MusicApp', ['ui.router'])
-    .config(($stateProvider, $urlRouterProvider) => {
+    .config(($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) => {
 
-        $urlRouterProvider.otherwise('artists');
+        $httpProvider.interceptors.push('AuthInterceptor');
+        $urlRouterProvider.otherwise('/login');
 
         $stateProvider
-            .state('artists', {
-                url: '/artists',
-                templateUrl: 'src/templates/artists.html',
-                controller: 'ArtistsController',
-                controllerAs: 'ArtistsCtrl'
-            })
             .state('login', {
                 url: '/login',
                 views: {
@@ -24,5 +19,21 @@ angular.module('MusicApp', ['ui.router'])
                         controllerAs: 'RegisterCtrl'
                     }
                 }
+            })
+            .state('artists', {
+                url: '/artists',
+                templateUrl: 'src/templates/artists.html',
+                controller: 'ArtistsController',
+                controllerAs: 'ArtistsCtrl'
+            })
+            .state('feed', {
+              url:'/feed',
+              views: {
+                '': {
+                  templateUrl: 'src/templates/feed.html'
+                }
+              }
             });
+
+          $locationProvider.html5Mode(true);
     });

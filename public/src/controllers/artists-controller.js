@@ -1,15 +1,6 @@
 angular.module('MusicApp')
-    .controller('ArtistsController', function() {
-        this.artists = [{
-            name: 'Tool',
-            album: 'Lateralus'
-        },
-        {
-          name: 'Jimi Hendrix',
-          album: 'Electric LadyLand'
-        },
-        {
-          name: 'Radiohead',
-          album: 'The Bends'
-        }];
+    .controller('ArtistsController', function(Artists) {
+        Artists.all().success((data) => {
+          this.artists = data;
+        });
     });

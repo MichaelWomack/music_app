@@ -2,7 +2,7 @@
 
 let mongo = require('mongodb');
 let client = mongo.MongoClient;
-let objectId = mongo.ObjectId;
+let ObjectId = mongo.ObjectId;
 let _db;
 
 let config = {
@@ -36,6 +36,6 @@ module.exports = {
   },
 
   isValidObjectId(id) {
-    return toObjectId(id).length == 24;
+    return this.toObjectId(id).toString().length == 24;
   }
 }

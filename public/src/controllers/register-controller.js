@@ -1,11 +1,6 @@
 angular.module('MusicApp').controller('RegisterController', function() {
   this.isRegistered = true;
-  this.user = {
-    email: '',
-    password: '',
-    passwordRetype: '',
-    artistName: ''
-  };
+  this.user = {};
 
   this.toggleRegistered = () => {
     this.isRegistered = !this.isRegistered;

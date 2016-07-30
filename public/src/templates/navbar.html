@@ -5,11 +5,12 @@
         </div>
         <ul class='nav navbar-nav'>
             <li><a ui-sref='artists'>Artist</a></li>
-            <li><a ui-sref='login'>Feed</a></li>
+            <li><a ui-sref='feed'>Feed</a></li>
+
             <!-- <li><a ui-sref=''>Link 2</a></li> -->
         </ul>
         <div class='navbar-text navbar-right'>
-            <a ui-sref='login'>Logout</a>
+            <a ui-sref='login' ng-click='NavCtrl.signOut()'>Logout</a>
         </div>
     </div>
 </nav>
