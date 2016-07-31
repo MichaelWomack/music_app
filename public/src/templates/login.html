@@ -2,6 +2,8 @@
     <div class='page-header'>
         <h1>Audio Bucket</h1>
     </div>
+
+    <!-- Put Error Message Here If Returned -->
     <form class='col-sm-6 col-sm-offset-3'
           ng-submit='LoginCtrl.signIn()'>
 
@@ -17,10 +19,9 @@
 
         <div class='form-group'>
             <button class='btn btn-primary btn-block' type='submit'>Sign In</button>
-            <button class='btn btn-info btn-block' data-toggle='modal'
+            <button class='btn btn-info btn-block' id='modal' data-toggle='modal'
             data-target='#registerModal' type='button'>Not Registered?</button>
         </div>
-        {{LoginCtrl.user.email}} {{LoginCtrl.user.password}}
     </form>
 
     <div ui-view='register'></div>

@@ -18,7 +18,7 @@ module.exports = (app, express) => {
         });
     });
 
-    router.get('/:id', (req, res) => {
+    router.get('/id/:id', (req, res) => {
         let id = req.params.id;
         let artists = mongoUtil.artists();
 
@@ -39,13 +39,26 @@ module.exports = (app, express) => {
             });
     });
 
-    router.get('/:name', (req, res) => {
+    router.put('/id/:id', (req, res) => {
+      let id = req.params.id;
+      let update = req.body;
+      let artists = mongoUtil.artists();
+
+      if (mongoUtil.isValidObjectId(id)) {
+        artists.save({_id: mongoUtil.toObjectId(id)}, update, (err, result) => {
+            if (err) res.json({success: false, message: err});
+            res.json({success: true, result: result});
+        });
+      } else {
+        res.json({success: false, message: 'Invalid object Id.'})
+      }
+    });
+
+    router.get('/name/:name', (req, res) => {
         let name = req.params.name;
         let artists = mongoUtil.artists();
 
-        artists.find({
-            name: name
-        }).toArray((err, artist) => {
+        artists.find({ name: name }).toArray((err, artist) => {
             if (err) res.json({
                 success: false,
                 message: err
@@ -53,30 +66,6 @@ module.exports = (app, express) => {
             res.json(artist);
         });
     });
-
-    // router.use((req, res, next) => {
-    //   console.log("Used middleware in artists API!!!!");
-    //   let token = req.body.token || req.params.token || req.headers['x-access-token'];
-    //   if (token) {
-    //     jwt.verify(token, secret, (err, decoded) => {
-    //       if (err)
-    //         return res.status(403).send({
-    //             sucess: false,
-    //             message: 'Failed to authenticate token.'
-    //         });
-    //       else {
-    //         req.decoded = decoded;
-    //         next();
-    //       }
-    //     });
-    //   }
-    //   else {
-    //     return res.status(403).send({
-    //       sucess: false,
-    //       message: 'No token provided'
-    //     });
-    //   }
-    // });
 
     return router;
 }

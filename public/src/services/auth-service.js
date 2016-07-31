@@ -13,10 +13,21 @@ angular.module('MusicApp').factory('Authentication', function($http, $q, AuthTok
     });
   };
 
+  auth.register = (info) => {
+    alert("Called");
+    return $http.post('/api/authenticate/register', {
+      email: info.email,
+      password: info.password
+    }).success((data) => {
+      return data;
+    });
+  };
+
   //handle logout
   auth.logout = () => {
     AuthToken.setToken();
   };
+
 
   //check if user is logged in
   auth.isLoggedIn = () => {

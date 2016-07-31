@@ -18,7 +18,12 @@ module.exports = (app, express) => {
     });
 
     router.get('/me', (req, res) => {
-        res.send('Ahoy, it\'s me!');
+        let users = mongoUtil.users();
+        let userInfo = req.decoded;
+        users.find({email: userInfo.email}).limit(1).next((err, user) => {
+          if (err) res.json({success: false, message: err});
+          res.json(user);
+        });
     });
 
     router.get('/:id', (req, res) => {
@@ -52,30 +57,6 @@ module.exports = (app, express) => {
             res.json(result);
         });
     });
-
-    // router.use((req, res, next) => {
-    //   console.log("Used middleware in User API!!!!");
-    //   let token = req.body.token || req.params.token || req.headers['x-access-token'];
-    //   if (token) {
-    //     jwt.verify(token, secret, (err, decoded) => {
-    //       if (err)
-    //         return res.status(403).send({
-    //             sucess: false,
-    //             message: 'Failed to authenticate token.'
-    //         });
-    //       else {
-    //         req.decoded = decoded;
-    //         next();
-    //       }
-    //     });
-    //   }
-    //   else {
-    //     return res.status(403).send({
-    //       sucess: false,
-    //       message: 'No token provided'
-    //     });
-    //   }
-    // });
 
     return router;
 }

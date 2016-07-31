@@ -33,6 +33,11 @@ angular.module('MusicApp', ['ui.router'])
                   templateUrl: 'src/templates/feed.html'
                 }
               }
+            }).state('profile', {
+              url:'/profile',
+              templateUrl: 'src/templates/edit-profile.html',
+              controller: 'ProfileController',
+              controllerAs: 'ProfileCtrl'
             });
 
           $locationProvider.html5Mode(true);

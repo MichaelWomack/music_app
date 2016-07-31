@@ -1,0 +1,41 @@
+<nav-bar></nav-bar>
+<div class='page-header'>
+    <h2 ng-hide={{!!ProfileCtrl.artist.name}} class='col-sm-offset-1'>Profile</h2>
+    <h2 ng-show={{!!ProfileCtrl.artist.name}} class='class=col-sm-offset-1'>{{ProfileCtrl.artist.name}}</h2>
+</div>
+
+<!-- Hide if artistName, url exists -->
+<div class='alert alert-'>{{ProfileCtrl.message}}</div>
+
+
+<div class='panel panel-info col-sm-6 col-md-offset-3' ng-show={{ProfileCtrl.artist.name}}>
+
+    <div class='panel-heading'>
+        <h3 class='panel-title'>Edit Profile</h3>
+    </div>
+
+    <div class='panel-body'>
+        <form ng-submit='ProfileCtrl.saveArtistProfile()'>
+            <div class='form-group'>
+                <label for='url'>Page URL</label>
+                <input type='text' id='url' class='form-control input-sm' ng-model='ProfileCtrl.artist.url' placeholder='audiobucket.com/artists/[your page url]' required>
+            </div>
+
+            <div class='form-group'>
+                <label for='name'>Artist Name</label>
+                <input type="text" id="name" class="form-control input-sm" ng-model='ProfileCtrl.artist.name' required>
+            </div>
+
+            <div class='form-group'>
+                <label for='bio'>Bio</label>
+                <textarea type="text" id="bio" class="form-control" ng-model='ProfileCtrl.artist.bio'></textarea>
+            </div>
+
+            <div class='form-group'>
+                <button class='btn btn-info' type='submit'>Save Profile</button>
+            </div>
+        </form>
+        {{ProfileCtrl.artist}}
+        {{ProfileCtrl.user}}
+    </div>
+</div>

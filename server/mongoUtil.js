@@ -37,5 +37,9 @@ module.exports = {
 
   isValidObjectId(id) {
     return this.toObjectId(id).toString().length == 24;
+  },
+
+  createObjectId() {
+    return new ObjectId();
   }
 }

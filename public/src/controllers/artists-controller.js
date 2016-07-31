@@ -3,4 +3,9 @@ angular.module('MusicApp')
         Artists.all().success((data) => {
           this.artists = data;
         });
+
+
+        // Maybe can filter artists by most popular,
+        // most likes, followers, by date joined.
+
     });
