@@ -30,6 +30,10 @@ module.exports = {
   artists() {
     return _db.collection('artists');
   },
+  
+  tracks() {
+    return _db.collection('tracks');
+  },
 
   toObjectId(id) {
     return new ObjectId(id);

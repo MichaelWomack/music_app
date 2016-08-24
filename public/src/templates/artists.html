@@ -1,9 +1,20 @@
-<div>
-  <nav-bar></nav-bar>
-  <ul>
-    <li ng-repeat='artist in ArtistsCtrl.artists'>
-      <div>Name: {{artist.name}}</div>
-      <div>Album: {{artist.album}}</div>
-    </li>
-  </ul>
+<nav-bar></nav-bar>
+<div class="page-header">
+    <h2 class="col-sm-offset-1">Artists</h2>
+</div>
+
+<div class='panel panel-info col-sm-10 col-md-offset-1'>
+    <div class='panel-body'>
+
+        <!-- Perhaps make these a card -->
+        <div class="row" ng-repeat='artist in ArtistsCtrl.artists'>
+            <div class="thumbnail col-sm-2">
+                <img src="{{ artist.imageUrl }}" alt="">
+            </div >
+            <div class="col-sm-2">
+                <div>Name: {{ artist.name }}</div>
+            </div>
+        </div>
+
+    </div>
 </div>

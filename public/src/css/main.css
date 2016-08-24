@@ -1,0 +1,60 @@
+
+.image-upload-form {
+    position: absolute;
+    bottom: 80px;
+    padding-top: 60%;
+    padding-right: 60%;
+    left: 30px;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.image-upload-form:hover {
+    opacity: 1;
+}
+
+ .btn-sm {
+    padding: 2px 8px;
+}
+
+#imageUploader {
+    display:none;
+}
+
+.upload-btn > .glyphicon-upload {
+
+}
+
+.track-upload-form {
+    padding: 30px;
+}
+
+.track-block {
+    margin-bottom: 40px;
+    box-shadow: 3px 3px 3px #8c8c8c;
+}
+
+.track-block:hover {
+}
+
+.track-block .glyphicon-container {
+    width: 20px;
+    height: 20px;
+}
+
+.track-block .glyphicon-container .glyphicon:hover {
+    font-size: 18px;
+    color: #00b0ff;
+}
+
+
+
+.close {
+    width: 20px;
+    height: 20px;
+}
+
+.close > .glyphicon-remove:hover {
+    font-size: 22px;
+    color: #00b0ff;
+}

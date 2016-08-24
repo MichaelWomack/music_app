@@ -6,12 +6,11 @@ angular.module('MusicApp').controller('RegisterController', function(Authenticat
 
   this.toggleRegistered = () => {
     this.isRegistered = !this.isRegistered;
-  }
+  };
 
   this.register = () => {
-    this.error = "Passwords don't match";
     if (this.user.password !== this.user.passwordRetype) {
-      alert("No matching passwords")
+        this.error = "Passwords don't match";
     }
     else {
       Authentication.register(this.user).success((data) => {

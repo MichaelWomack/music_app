@@ -1,24 +1,47 @@
 <nav-bar></nav-bar>
+
 <div class='page-header'>
-    <h2 ng-hide={{!!ProfileCtrl.artist.name}} class='col-sm-offset-1'>Profile</h2>
-    <h2 ng-show={{!!ProfileCtrl.artist.name}} class='class=col-sm-offset-1'>{{ProfileCtrl.artist.name}}</h2>
+    <div class="row">
+        <div class="col-sm-offset-1 col-sm-2">
+            <div class="thumbnail">
+                <img src="{{ ProfileCtrl.artist.imageUrl }}" alt="" ng-show="ProfileCtrl.artist.imageUrl">
+                <img src="images/user.png" ng-hide="ProfileCtrl.artist.imageUrl">
+            </div>
+
+            <form enctype="multipart/form-data" class="image-upload-form">
+                <div class='form-group'>
+                    <label class="btn btn-default btn-sm">
+                        upload <input type="file" id='imageUploader' placeholder="Upload" name="image" onchange="angular.element(this).controller().uploadImage()">
+                    </label>
+                </div>
+            </form>
+
+            <h2 ng-hide="ProfileCtrl.artist.name">Artist name</h2>
+            <h2 ng-show="ProfileCtrl.artist.name">{{ ProfileCtrl.artist.name }}</h2>
+            <a ng-click="ProfileCtrl.toggleEditMode()">Edit Profile</a>
+        </div>
+
+
+        <div class="col-sm-4 col-sm-offset-2">
+            <span class="alert alert-success fade in" ng-show="!!ProfileCtrl.message">{{ ProfileCtrl.message }}</span>
+        </div>
+    </div>
 </div>
 
 <!-- Hide if artistName, url exists -->
-<div class='alert alert-'>{{ProfileCtrl.message}}</div>
 
-
-<div class='panel panel-info col-sm-6 col-md-offset-3' ng-show={{ProfileCtrl.artist.name}}>
+<div class='panel panel-info col-sm-6 col-md-offset-3' ng-show="ProfileCtrl.editMode">
 
     <div class='panel-heading'>
         <h3 class='panel-title'>Edit Profile</h3>
     </div>
 
     <div class='panel-body'>
-        <form ng-submit='ProfileCtrl.saveArtistProfile()'>
+        <form enctype="multipart/form-data" ng-submit='ProfileCtrl.saveArtistProfile()'>
             <div class='form-group'>
                 <label for='url'>Page URL</label>
-                <input type='text' id='url' class='form-control input-sm' ng-model='ProfileCtrl.artist.url' placeholder='audiobucket.com/artists/[your page url]' required>
+                <input type='text' id='url' class='form-control input-sm' ng-model='ProfileCtrl.artist.url'
+                       placeholder='audiobucket.com/artists/[your page url]' required>
             </div>
 
             <div class='form-group'>
@@ -31,11 +54,33 @@
                 <textarea type="text" id="bio" class="form-control" ng-model='ProfileCtrl.artist.bio'></textarea>
             </div>
 
+
             <div class='form-group'>
                 <button class='btn btn-info' type='submit'>Save Profile</button>
             </div>
         </form>
-        {{ProfileCtrl.artist}}
-        {{ProfileCtrl.user}}
+    </div>
+</div>
+
+
+<div class='col-sm-10 col-md-offset-1' ng-hide="ProfileCtrl.editMode">
+    <ul class='nav nav-tabs nav-justified'>
+        <li role='presentation'><a data-toggle='tab' data-item='tracks' href='#tracks'>Tracks</a></li>
+        <li role='presentation'><a data-toggle='tab' data-item='albums' href='#albums'>Albums</a></li>
+        <li role='presentation'><a data-toggle='tab' data-item='following' href='#following'>Following</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id='tracks' class='tab-pane fade in active'>
+            <div ui-view='tracks'></div>
+        </div>
+
+        <div id='albums' class='tab-pane fade'>
+            <div ui-view='albums'></div>
+        </div>
+
+        <div id='following' class='tab-pane fade'>
+            <div ui-view='following'></div>
+        </div>
     </div>
 </div>

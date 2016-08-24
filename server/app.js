@@ -13,6 +13,7 @@ let secret = config.secret;
 mongoUtil.connect();
 
 app.use(express.static(__dirname + '/../public'));
+app.use('/uploads', express.static(__dirname + '/../uploads'));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
     extended: true
@@ -31,9 +32,11 @@ app.use((req, res, next) => {
 let usersRoute = require('./routes/users')(app, express);
 let loginRoute = require('./routes/authenticate')(app, express);
 let artistsRoute = require('./routes/artists')(app, express);
+let tracksRoute = require('./routes/tracks')(app, express);
 
 
 app.use('/api/authenticate', loginRoute);
+
 
 app.use('/api', (req, res, next) => {
     let token = req.body.token || req.params.token || req.headers['x-access-token'];
@@ -65,6 +68,7 @@ app.use('/api', (req, res, next) => {
 
 app.use('/api/users', usersRoute);
 app.use('/api/artists', artistsRoute);
+app.use('/api/tracks', tracksRoute);
 
 
 app.get('*', (req, res) => {

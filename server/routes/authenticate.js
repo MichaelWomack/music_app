@@ -83,15 +83,23 @@ module.exports = (app, express) => {
                         message: err
                     });
 
+                    let artist_id = mongoUtil.createObjectId();
+                    let artists = mongoUtil.artists();
+                    
                     users.insert({
                         email: email,
                         password: hash,
-                        artist_id: mongoUtil.createObjectId() 
+                        artist_id: artist_id
                     }, (err, result) => {
                         if (err) res.json({
                             success: false,
                             message: err
                         });
+                        
+                        artists.insert({_id: artist_id}, (err, result) => {
+                           if (err) res.json({success: false, message: err});
+                        });
+                        
                         res.json({
                             success: true,
                             message: `Successfully registered ${email}!`
@@ -103,5 +111,4 @@ module.exports = (app, express) => {
     });
 
     return router;
-
 }

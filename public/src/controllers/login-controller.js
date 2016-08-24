@@ -1,7 +1,7 @@
 angular.module('MusicApp')
     .controller('LoginController', function(Authentication, $location, $rootScope) {
         if (Authentication.isLoggedIn())
-          $location.path('/feed');
+          $location.path('/profile');
 
         this.user;
         this.error;
@@ -13,7 +13,7 @@ angular.module('MusicApp')
                 // alert(data.message);
                 if (data.success) {
                   //if profile created
-                    $location.path('/feed');
+                    $location.path('/profile');
                   // otherwise route to create profile page
                   }
                 else {

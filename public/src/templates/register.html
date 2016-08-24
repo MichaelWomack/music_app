@@ -16,19 +16,14 @@
                         <input class='form-control input-sm' id='email' type="text" ng-model='RegisterCtrl.user.email'>
                     </div>
 
-                    <!-- <div class='form-group'>
-                        <label for='artist-name'>Artist Name</label>
-                        <input class='form-control input-sm' id='artist-name' type="text" ng-model='RegisterCtrl.user.artistName'>
-                    </div> -->
-
                     <div class='form-group'>
                         <label for='password'>Password</label>
-                        <input class='form-control input-sm' id='password' type="text" ng-model='RegisterCtrl.user.password'>
+                        <input class='form-control input-sm' id='password' type="password" ng-model='RegisterCtrl.user.password'>
                     </div>
 
                     <div class='form-group'>
-                        <label for='password-retype'>Retype Password</label>
-                        <input class='form-control input-sm' id='password-retype' type="text" ng-model='RegisterCtrl.user.passwordRetype'>
+                        <label for='password-retype'>Re-type Password</label>
+                        <input class='form-control input-sm' id='password-retype' type="password" ng-model='RegisterCtrl.user.passwordRetype'>
                     </div>
 
                     <div class='form-group'>
@@ -39,42 +34,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div>
-    <div class=''>
-        <a ng-click='RegisterCtrl.toggleRegistered()'>
-            <span ng-show='RegisterCtrl.isRegistered'>Not Registered?</span>
-            <span ng-hide='RegisterCtrl.isRegistered'>Registered!</span>
-        </a>
-
-        <div class='panel panel-info' ng-hide='RegisterCtrl.isRegistered'>
-            <div class='panel-heading'>
-                Hello from the Register Page!
-
-            </div>
-
-            <form class='panel-body'>
-                <span class='glyphicon glyphicon-remove'></span>
-                <div class='form-group'>
-                    <label for='email'>Email</label>
-                    <input class='form-control input-sm' id='email' type="text" ng-model='RegisterCtrl.email'>
-                </div>
-
-                <div class='form-group'>
-                    <label for='artist-name'>Artist Name</label>
-                    <input class='form-control input-sm' id='artist-name' type="text" ng-model='RegisterCtrl.artistName'>
-                </div>
-
-                <div class='form-group'>
-                    <label for='password'>Password</label>
-                    <input class='form-control input-sm' id='password' type="text" ng-model='RegisterCtrl.password'>
-                </div>
-
-                <div class='form-group'>
-                    <label for='password-retype'>Retype Password</label>
-                    <input class='form-control input-sm' id='password-retype' type="text" ng-model='RegisterCtrl.passwordRetype'>
-                </div>
-            </form>
-        </div>
-    </div>
-</div> -->
