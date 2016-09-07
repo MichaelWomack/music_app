@@ -29,11 +29,11 @@ app.use((req, res, next) => {
 });
 
 
-let usersRoute = require('./routes/users')(app, express);
-let loginRoute = require('./routes/authenticate')(app, express);
-let artistsRoute = require('./routes/artists')(app, express);
-let tracksRoute = require('./routes/tracks')(app, express);
-
+const usersRoute = require('./routes/users')(app, express);
+const loginRoute = require('./routes/authenticate')(app, express);
+const artistsRoute = require('./routes/artists')(app, express);
+const tracksRoute = require('./routes/tracks')(app, express);
+const albumsRouter = require('./routes/albums')(app, express);
 
 app.use('/api/authenticate', loginRoute);
 
@@ -41,7 +41,7 @@ app.use('/api/authenticate', loginRoute);
 app.use('/api', (req, res, next) => {
     let token = req.body.token || req.params.token || req.headers['x-access-token'];
     console.log(token);
-    console.log("In Middleware...")
+    console.log("In Middleware...");
     if (token) {
         jwt.verify(token, secret, (err, decoded) => {
             if (err) {
@@ -69,6 +69,7 @@ app.use('/api', (req, res, next) => {
 app.use('/api/users', usersRoute);
 app.use('/api/artists', artistsRoute);
 app.use('/api/tracks', tracksRoute);
+app.use('/api/albums', albumsRouter);
 
 
 app.get('*', (req, res) => {

@@ -47,7 +47,9 @@ angular.module('MusicApp', ['ui.router'])
                         controllerAs: 'TracksCtrl'
                     },
                     'albums@profile': {
-                        templateUrl: 'src/templates/profile/albums.html'
+                        templateUrl: 'src/templates/profile/albums.html',
+                        controller: 'AlbumsController',
+                        controllerAs: 'AlbumsCtrl'
                     },
                     'following@profile': {
                         templateUrl: 'src/templates/profile/following.html'

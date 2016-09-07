@@ -13,7 +13,11 @@
     opacity: 1;
 }
 
- .btn-sm {
+.artist-name {
+    white-space: nowrap;
+}
+
+.btn-sm {
     padding: 2px 8px;
 }
 
@@ -21,32 +25,35 @@
     display:none;
 }
 
-.upload-btn > .glyphicon-upload {
-
+.upload-btn {
+    margin-right: 50px;
 }
 
 .track-upload-form {
     padding: 30px;
 }
 
+
 .track-block {
     margin-bottom: 40px;
-    box-shadow: 3px 3px 3px #8c8c8c;
+    transition: box-shadow .2s;
 }
 
 .track-block:hover {
+    box-shadow: 3px 3px 3px #8c8c8c;
+
 }
 
 .track-block .glyphicon-container {
     width: 20px;
     height: 20px;
+    font-size: 16px;
+
 }
 
 .track-block .glyphicon-container .glyphicon:hover {
-    font-size: 18px;
     color: #00b0ff;
 }
-
 
 
 .close {
@@ -57,4 +64,8 @@
 .close > .glyphicon-remove:hover {
     font-size: 22px;
     color: #00b0ff;
+}
+
+.no-content {
+    margin-bottom: 50px;
 }

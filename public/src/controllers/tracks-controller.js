@@ -13,8 +13,8 @@ angular.module('MusicApp').controller('TracksController', function (Users, Track
         this.showUploadForm = !this.showUploadForm;
     };
     
-    this.toggleTrackDetail = (element) => {
-        element.show = !element.show;
+    this.toggleTrackDetail = (trackElement) => {
+        trackElement.show = !trackElement.show;
     };
     
     this.uploadTrack = () => {

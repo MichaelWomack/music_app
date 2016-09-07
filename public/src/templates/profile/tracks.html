@@ -2,7 +2,7 @@
     <div class="panel-heading">
         <h3>
             <span class="glyphicon glyphicon-music"></span>
-            Track List
+            <span>Track List</span>
         </h3>
     </div>
     <div class="panel-body">
@@ -22,9 +22,16 @@
                                   class="glyphicon glyphicon-remove">
                             </span>
                         </div>
-                        <p class="card-text" ng-show="track.show">
-                            {{ track.description }}
-                        </p>
+                        <div class="card-text" ng-show="track.show">
+                            <div id="album-info" ng-show="track.album">
+                                <h6 class="card-subtitle text-muted">Album:</h6>
+                                <p class="small">{{ track.album }}</p>
+                            </div>
+                            <div class="description-info" ng-show="track.description">
+                                <h6 class='card-subtitle text-muted'>Description:</h6>
+                                <p class="small">{{ track.description }}</p>
+                            </div>
+                        </div>
                         <audio controls>
                             <source src="{{ track.url }}">
                         </audio>
@@ -32,48 +39,61 @@
                 </div>
             </div>
 
-            <h3 class="text-center" ng-show="TracksCtrl.tracks.length == 0">You haven't uploaded any tracks!</h3>
+            <h3 class="text-center" ng-show="TracksCtrl.tracks.length == 0">You don't have any uploaded any tracks!</h3>
 
-            <button class="btn btn-info btn-sm upload-btn"
+            <button class="btn btn-info btn-sm upload-btn pull-right"
                     ng-click="TracksCtrl.toggleUploadForm()"
-                    ng-hide="TracksCtrl.showUploadForm"><span class="glyphicon glyphicon-upload"></span>
-                upload new track
+                    ng-hide="TracksCtrl.showUploadForm">
+                <span class="glyphicon glyphicon-upload"></span>
+                <span>upload new track</span>
             </button>
 
-            <div class="col-sm-4 col-sm-offset-1">
-                <div class="close text-right">
-                    <span class="glyphicon glyphicon-remove"
-                          ng-click="TracksCtrl.toggleUploadForm()"
-                          ng-show="TracksCtrl.showUploadForm">
-                    </span>
+
+            <div class="col-sm-5 col-sm-offset-1">
+
+                <div class="panel panel-default" ng-show="TracksCtrl.showUploadForm">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">Upload New Track</h4>
+                    </div>
+
+                    <div class="panel-body">
+                        <form enctype="multipart/form-data" class="track-upload-form">
+                            <div class="form-group">
+                                <input type="file" id="track-upload">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="album">Album</label>
+                                <input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.album">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.name">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Track Description</label>
+                                <textarea class='form-control input-sm' ng-model="TracksCtrl.trackInfo.description"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <button class='btn btn-info btn-sm' ng-click="TracksCtrl.uploadTrack()">
+                                    <span class="glyphicon glyphicon-circle-arrow-up"></span>
+                                    <span>upload</span>
+
+                                </button>
+
+                                <button class="btn btn-danger btn-sm upload-btn"
+                                        ng-click="TracksCtrl.toggleUploadForm()">
+                                    <span class="glyphicon glyphicon-remove"></span>
+                                    <span>cancel</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
-                <form enctype="multipart/form-data" class="track-upload-form" ng-show="TracksCtrl.showUploadForm">
-                    <div class="form-group">
-                        <label for="track-upload">Upload New Track</label>
-                        <input type="file" id="track-upload">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="album">Album</label>
-                        <input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.album">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.name">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="description">Track Description</label>
-                        <textarea class='form-control input-sm' ng-model="TracksCtrl.trackInfo.description"></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <button class='btn btn-info btn-sm' ng-click="TracksCtrl.uploadTrack()">Upload</button>
-                    </div>
-
-                </form>
             </div>
         </div>
     </div>

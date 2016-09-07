@@ -1,1 +1,20 @@
-<div>Welcome to Following View!</div>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            <span class="glyphicon glyphicon-user"></span>
+            <span>Following</span>
+        </h3>
+    </div>
+
+    <div class="panel-body">
+        <div ng-hide="Profile.artist.following" class="text-center no-content">
+            <h3>You aren't currently following any artists!</h3>
+            <a href="/artists" class="btn btn-info btn-sm">
+                <span class="glyphicon glyphicon-globe"></span>
+                <span>explore artists</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+

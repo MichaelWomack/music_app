@@ -11,14 +11,20 @@
             <form enctype="multipart/form-data" class="image-upload-form">
                 <div class='form-group'>
                     <label class="btn btn-default btn-sm">
-                        upload <input type="file" id='imageUploader' placeholder="Upload" name="image" onchange="angular.element(this).controller().uploadImage()">
+                        <span class="glyphicon glyphicon-picture"></span>
+                        <span>upload</span>
+                        <input type="file" id='imageUploader' placeholder="Upload" name="image" onchange="angular.element(this).controller().uploadImage()">
                     </label>
                 </div>
             </form>
 
-            <h2 ng-hide="ProfileCtrl.artist.name">Artist name</h2>
-            <h2 ng-show="ProfileCtrl.artist.name">{{ ProfileCtrl.artist.name }}</h2>
-            <a ng-click="ProfileCtrl.toggleEditMode()">Edit Profile</a>
+            <h2 class="artist-name" ng-hide="ProfileCtrl.artist.name">Artist name</h2>
+            <h2 class="artist-name" ng-show="ProfileCtrl.artist.name">{{ ProfileCtrl.artist.name }}</h2>
+            <button type="button" class="btn btn-info btn-sm" ng-hide="ProfileCtrl.editMode" ng-click="ProfileCtrl.toggleEditMode()">
+                <span class="glyphicon glyphicon-pencil"></span>
+                <span>edit profile</span>
+            </button>
+
         </div>
 
 
@@ -56,7 +62,12 @@
 
 
             <div class='form-group'>
-                <button class='btn btn-info' type='submit'>Save Profile</button>
+                <button class='btn btn-info btn-sm' type='submit'>Save Profile</button>
+
+                <button type="button" class="btn btn-danger btn-sm" ng-show="ProfileCtrl.editMode" ng-click="ProfileCtrl.toggleEditMode()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span>cancel</span>
+                </button>
             </div>
         </form>
     </div>

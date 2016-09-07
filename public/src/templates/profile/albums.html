@@ -1,18 +1,78 @@
-<div>
-    <table>
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Year</th>
-                <th>Genre</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat='album in ProfileCtrl.artist.albums'>
-                <td>{{album.name}}</td>
-                <td>{{album.year}}</td>
-                <td>{{album.genre}}</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            <span class="glyphicon glyphicon-th-list"></span>
+            <span>Albums</span>
+        </h3>
+    </div>
+
+    <!-- List Albums -->
+    <div class="panel-body">
+        <div ng-show="Profile.artist.albums">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat='album in ProfileCtrl.artist.albums'>
+                    <td>{{ album.name }}</td>
+                    <td>{{ album.releaseDate }}</td>
+                    <td>{{ album.genre }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Add Album form -->
+        <form class="col-md-4 col-sm-offset-4" ng-show="AlbumsCtrl.showAddAlbum" ng-submit="">
+            <div class="form-group">
+                <label>Album Name</label>
+                <input type="text" class="form-control input-sm" ng-model="AlbumsCtrl.album.name">
+            </div>
+
+            <div class="form-group">
+                <label for="">Release Date</label>
+                <input type="date" class="form-control input-sm" ng-modul="AlbumsCtrl.album.releaseDate">
+            </div>
+
+            <div class="form-group">
+                <label for="">Genre</label>
+                <input type="text" class="form-control input-sm" ng-model="AlbumsCtrl.album.genre">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-info btn-sm">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    add album
+                </button>
+
+                <button class="btn btn-danger btn-sm upload-btn"
+                        ng-click="AlbumsCtrl.toggleAddAlbum()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                    <span>cancel</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+
+
+
+    <!---->
+    <div ng-hide="Profile.artist.albums || AlbumsCtrl.showAddAlbum" class="text-center no-content">
+        <h3>You don't have any albums!</h3>
+        <button class="btn btn-info btn-sm" ng-click="AlbumsCtrl.toggleAddAlbum()">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span>new album</span>
+        </button>
+    </div>
 </div>
+
+
+
+
