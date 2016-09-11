@@ -1,9 +1,14 @@
-angular.module('MusicApp').controller('TracksController', function (Users, Tracks, $state) {
+angular.module('MusicApp').controller('TracksController', function (Users, Tracks, Artists, $state) {
     Users.getCurrentUser().success((data) => {
         this.user = data;
 
         Tracks.getTracksByArtistId(this.user.artist_id).success((data) => {
             this.tracks = data;
+        });
+        
+        Artists.getArtist(this.user.artist_id).success((data) => {
+            this.artist = data;
+            this.albums = this.artist.albums.map((album) => {return album.name});
         });
     });
     

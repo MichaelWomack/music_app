@@ -7,7 +7,7 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class="col-sm-4 col-sm-offset-1">
+            <div class="col-sm-5 col-sm-offset-1">
                 <!-- build a component for this -->
                 <div ng-repeat="track in TracksCtrl.tracks" class="card">
                     <div class="card-block track-block">
@@ -24,6 +24,7 @@
                         </div>
                         <div class="card-text" ng-show="track.show">
                             <div id="album-info" ng-show="track.album">
+
                                 <h6 class="card-subtitle text-muted">Album:</h6>
                                 <p class="small">{{ track.album }}</p>
                             </div>
@@ -62,9 +63,12 @@
                                 <input type="file" id="track-upload">
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" ng-show="!!TracksCtrl.artist.albums && TracksCtrl.artist.albums.length > 0">
                                 <label for="album">Album</label>
-                                <input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.album">
+                                <select ng-options="album for album in TracksCtrl.albums"
+                                        ng-model="TracksCtrl.trackInfo.album">
+                                </select>
+                                <!--<input class='form-control input-sm' type="text" ng-model="TracksCtrl.trackInfo.album">-->
                             </div>
 
                             <div class="form-group">
@@ -89,11 +93,11 @@
                                     <span class="glyphicon glyphicon-remove"></span>
                                     <span>cancel</span>
                                 </button>
+                                {{ TracksCtrl.trackInfo }}
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

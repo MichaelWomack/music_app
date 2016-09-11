@@ -8,18 +8,18 @@ let fs = require('fs');
 let storage = multer.diskStorage({
     destination: (req, file, callback) => {
         console.log("In audio destination function...");
-        console.log(req.body);
-        
+
         let audioPath = `${audioUploads}${req.params.artist_id}`;
         fs.exists(audioPath, (exists) => {
             if (!exists) {
                 fs.mkdir(audioPath, (err) => {
                     if (err) console.log("ERROR: " + err);
+                    req.params.url = `${audioPath.substr(1)}/${file.originalname}`;
+                    callback(null, audioPath);
                 });
             }
         });
-        req.params.url = `${audioPath.substr(1)}/${file.originalname}`;
-        callback(null, audioPath);
+
     },
 
     filename: (req, file, callback) => {
@@ -56,6 +56,7 @@ module.exports = (app, express) => {
 
             else {
                 let trackInfo = req.body;
+                console.log("TRACK INFO: " + JSON.stringify(trackInfo) );
                 trackInfo.url = req.params.url;
                 let tracks = mongoUtil.tracks();
                 console.log("Artist ID: " + req.params.artist_id);

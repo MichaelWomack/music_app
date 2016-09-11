@@ -8,27 +8,73 @@
 
     <!-- List Albums -->
     <div class="panel-body">
-        <div ng-show="Profile.artist.albums">
+        <div ng-show="!AlbumsCtrl.albumsUndefinedOrEmpty()">
             <table class="table">
                 <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Year</th>
+                    <th>Release Date</th>
                     <th>Genre</th>
+                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat='album in ProfileCtrl.artist.albums'>
-                    <td>{{ album.name }}</td>
-                    <td>{{ album.releaseDate }}</td>
-                    <td>{{ album.genre }}</td>
+                <tr ng-repeat='album in AlbumsCtrl.artist.albums'>
+                    <td>
+                        <div ng-hide="AlbumsCtrl.editableAlbum[$index]">{{ album.name }}</div>
+                        <input ng-show="AlbumsCtrl.editableAlbum[$index]" ng-model="album.name"
+                               class="form-control input-sm" type="text"
+                               placeholder="{{ album.name }}">
+                    </td>
+
+                    <td>
+                        <div ng-hide="AlbumsCtrl.editableAlbum[$index]">{{ AlbumsCtrl.formatDate(album.releaseDate) }}</div>
+                        <input ng-show="AlbumsCtrl.editableAlbum[$index]" ng-model="album.releaseDate"
+                               class="form-control input-sm" type="date"
+                               placeholder="{{ AlbumsCtrl.formatDate(album.releaseDate) }}">
+                    </td>
+                    <td>
+                        <div ng-hide="AlbumsCtrl.editableAlbum[$index]">{{ album.genre }}</div>
+                        <input ng-show="AlbumsCtrl.editableAlbum[$index]" ng-model="album.genre"
+                               class="form-control input-sm" type="text"
+                               placeholder="{{ album.genre }}">
+                    </td>
+
+                    <td>
+                        <span ng-hide="AlbumsCtrl.editableAlbum[$index]"
+                              ng-click="AlbumsCtrl.toggleEdit($index)"
+                              class="glyphicon glyphicon-pencil">
+                        </span>
+
+                        <span ng-show="AlbumsCtrl.editableAlbum[$index]"
+                              ng-click="AlbumsCtrl.toggleEdit($index)"
+                              class="glyphicon glyphicon-remove">
+                        </span>
+
+                        <span ng-show="AlbumsCtrl.editableAlbum[$index]"
+                              ng-click="AlbumsCtrl.removeAlbum($index)"
+                              class="glyphicon glyphicon-trash">
+                        </span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
+
+            <div class="form-group col-md-4 col-md-offset-4">
+                <button class="btn btn-info btn-block btn-sm" ng-click="AlbumsCtrl.saveAlbums()" ng-hide="AlbumsCtrl.showAddAlbum">save albums</button>
+            </div>
+
+            <div class="form-group col-md-4 col-md-offset-4">
+                <button class="btn btn-warning btn-block btn-sm" ng-click="AlbumsCtrl.toggleAddAlbum()" ng-hide="AlbumsCtrl.showAddAlbum">
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span>new album</span>
+                </button>
+            </div>
         </div>
 
+
         <!-- Add Album form -->
-        <form class="col-md-4 col-sm-offset-4" ng-show="AlbumsCtrl.showAddAlbum" ng-submit="">
+        <form class="col-md-4 col-sm-offset-4" ng-show="AlbumsCtrl.showAddAlbum" ng-submit="AlbumsCtrl.addAlbum()">
             <div class="form-group">
                 <label>Album Name</label>
                 <input type="text" class="form-control input-sm" ng-model="AlbumsCtrl.album.name">
@@ -36,7 +82,7 @@
 
             <div class="form-group">
                 <label for="">Release Date</label>
-                <input type="date" class="form-control input-sm" ng-modul="AlbumsCtrl.album.releaseDate">
+                <input type="date" class="form-control input-sm" ng-model="AlbumsCtrl.album.releaseDate">
             </div>
 
             <div class="form-group">
@@ -50,8 +96,7 @@
                     add album
                 </button>
 
-                <button class="btn btn-danger btn-sm upload-btn"
-                        ng-click="AlbumsCtrl.toggleAddAlbum()">
+                <button type="button" class="btn btn-danger btn-sm upload-btn" ng-click="AlbumsCtrl.toggleAddAlbum()">
                     <span class="glyphicon glyphicon-remove"></span>
                     <span>cancel</span>
                 </button>
@@ -59,12 +104,8 @@
         </form>
     </div>
 
-
-
-
-
     <!---->
-    <div ng-hide="Profile.artist.albums || AlbumsCtrl.showAddAlbum" class="text-center no-content">
+    <div ng-hide="!AlbumsCtrl.albumsUndefinedOrEmpty() || AlbumsCtrl.showAddAlbum" class="text-center no-content">
         <h3>You don't have any albums!</h3>
         <button class="btn btn-info btn-sm" ng-click="AlbumsCtrl.toggleAddAlbum()">
             <span class="glyphicon glyphicon-plus"></span>
