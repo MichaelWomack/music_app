@@ -14,10 +14,11 @@ let storage = multer.diskStorage({
             if (!exists) {
                 fs.mkdir(audioPath, (err) => {
                     if (err) console.log("ERROR: " + err);
-                    req.params.url = `${audioPath.substr(1)}/${file.originalname}`;
-                    callback(null, audioPath);
                 });
             }
+
+            req.params.url = `${audioPath.substr(1)}/${file.originalname}`;
+            callback(null, audioPath);
         });
 
     },
@@ -56,7 +57,7 @@ module.exports = (app, express) => {
 
             else {
                 let trackInfo = req.body;
-                console.log("TRACK INFO: " + JSON.stringify(trackInfo) );
+                console.log("TRACK INFO: " + JSON.stringify(trackInfo));
                 trackInfo.url = req.params.url;
                 let tracks = mongoUtil.tracks();
                 console.log("Artist ID: " + req.params.artist_id);
@@ -67,6 +68,29 @@ module.exports = (app, express) => {
                     res.json({success: true, message: `Successfully uploaded ${trackInfo.name}.`});
                 });
             }
+        });
+    });
+
+    router.delete('/:artist_id/:track_id', (req, res) => {
+        // delete track
+        let artistId = req.params.artist_id;
+        let trackId = mongoUtil.toObjectId(req.params.track_id);
+        let tracks = mongoUtil.tracks();
+
+        tracks.find({_id: trackId}).limit(1).next((err, doc) => {
+            if (err) res.json({success: false, message: err});
+
+            let path = `.${doc.url}`;
+            fs.unlink(path, (err) => {
+                if (err) res.json({success: false, message: err});
+                else {
+                    tracks.remove({_id: trackId}, (err, result) => {
+                        if (err) res.json({success: false, message: err});
+
+                        res.json({success: true, message: result});
+                    });
+                }
+            });
         });
     });
 

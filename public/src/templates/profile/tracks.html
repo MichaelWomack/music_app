@@ -21,6 +21,14 @@
                                   ng-show="track.show"
                                   class="glyphicon glyphicon-remove">
                             </span>
+                            <span ng-click="TracksCtrl.toggleEditTrack($index)"
+                                  ng-show="track.show"
+                                  class="glyphicon glyphicon-pencil">
+                            </span>
+                            <span ng-click="TracksCtrl.deleteTrack($index)"
+                                  ng-show="track.show"
+                                  class="glyphicon glyphicon-trash">
+                            </span>
                         </div>
                         <div class="card-text" ng-show="track.show">
                             <div id="album-info" ng-show="track.album">

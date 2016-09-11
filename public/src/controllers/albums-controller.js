@@ -45,8 +45,7 @@ angular.module('MusicApp').controller('AlbumsController', function(Artists, User
     };
     
     this.albumsUndefinedOrEmpty = () => {
-        let albums = this.artist.albums;
-        return (albums == undefined || albums.length == 0);
+        return (this.artist.albums == undefined|| this.artist.albums.length == 0);
     };
 
     this.formatDate = (date) => {

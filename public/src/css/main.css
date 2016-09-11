@@ -44,6 +44,14 @@
 
 }
 
+.glyphicon-container{
+    display: flex;
+}
+
+.glyphicon-container > span {
+    margin-right: 10px;
+}
+
 .track-block .glyphicon-container {
     width: 20px;
     height: 20px;

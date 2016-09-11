@@ -12,5 +12,9 @@ angular.module('MusicApp').factory('Tracks', function($http) {
         });
     };
     
+    service.deleteTrack = (artistId, trackId) => {
+      return $http.delete(`/api/tracks/${artistId}/${trackId}`);  
+    };
+    
     return service;
 });

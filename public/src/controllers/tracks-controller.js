@@ -4,6 +4,7 @@ angular.module('MusicApp').controller('TracksController', function (Users, Track
 
         Tracks.getTracksByArtistId(this.user.artist_id).success((data) => {
             this.tracks = data;
+            this.editableTracks = this.tracks.map((track) => {this.editableTracks.push(false)});
         });
         
         Artists.getArtist(this.user.artist_id).success((data) => {
@@ -21,7 +22,11 @@ angular.module('MusicApp').controller('TracksController', function (Users, Track
     this.toggleTrackDetail = (trackElement) => {
         trackElement.show = !trackElement.show;
     };
-    
+
+    this.toggleEditTrack = (index) => {
+        this.editableTracks[index] = !this.editableTracks[index];
+    };
+
     this.uploadTrack = () => {
         let $audioFile = $('#track-upload')[0].files[0];
         let formData = new FormData();
@@ -45,6 +50,15 @@ angular.module('MusicApp').controller('TracksController', function (Users, Track
                 notify: true
             });
         });
+    };
 
+    this.deleteTrack = (index) => {
+        let trackId = this.tracks[index]._id;
+        this.tracks.splice(index, 1);
+
+        // Call delete track http
+        Tracks.deleteTrack(this.artist._id, trackId).success((data) => {
+            alert(`Track with Id ${trackId} deleted: ${data}`);
+        });
     };
 });
